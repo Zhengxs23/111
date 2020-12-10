@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .div1 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid red;
+            float: left;
+        }
+
+        p {
+            background: orange;
+        }
+
+        .div2 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid blue;
+            float: left;
+            margin-left: 20px;
+        }
+
+        .div3 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid green;
+            float: left;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1">
+        <p class="p1" class="item" draggable="true">p1段落内容</p>
+        <p class="p2" class="item" draggable="true">p2段落内容</p>
+        <p class="p3" class="item" draggable="true">p3段落内容</p>
+    </div>
+
+    <div class="div2">
+    </div>
+    <div class="div3"></div>
+
+    <script>
+        // var p = document.getElementsByTagName("p")[0];
+        var p1 = document.querySelector(".p1");
+        var p2 = document.querySelector(".p2");
+        var p3 = document.querySelector(".p3");
+        var ps = document.querySelectorAll("p");
+        var div1 = document.querySelector(".div1");
+        var div2 = document.querySelector(".div2");
+        var div3 = document.querySelector(".div3");
+
+
+        for(let i = 0 ; i<p.length;p++){
+            
+        }
+
+        //封装拖拽函数
+        function move(el) {
+            el.ondragover = function (e) {
+                e.preventDefault();
+                console.log(e.target)
+            };
+            el.ondrop = function (e) {
+                e.target.appendChild(p1);
+            }
+        }
+
+        move(div1);
+        move(div2);
+        move(div3);
+    </script>
+</body>
+
+</html>

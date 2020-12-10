@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .div1 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid red;
+            float: left;
+        }
+
+        p {
+            background: orange;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear:both;
+        }
+        .div2 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid blue;
+            float: left;
+            margin-left: 20px;
+        }
+
+        .div3 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid green;
+            float: left;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body class="clearfix">
+    <div class="div1">
+        <p class="p1" class="item" draggable="true">p1段落内容</p>
+        <p class="p2" class="item" draggable="true">p2段落内容</p>
+        <p class="p3" class="item" draggable="true">p3段落内容</p>
+    </div>
+
+    <div class="div2">
+    </div>
+    <div class="div3"></div>
+
+    <script>
+        // var p = document.getElementsByTagName("p")[0];
+        // var p1 = document.querySelector(".p1");
+        // var p2 = document.querySelector(".p2");
+        // var p3 = document.querySelector(".p3");
+        var ps = document.querySelectorAll("p");
+        var div1 = document.querySelector(".div1");
+        var div2 = document.querySelector(".div2");
+        var div3 = document.querySelector(".div3");
+        var div = document.querySelectorAll("div");
+        var body = document.querySelector("body");
+        var index = 0;
+
+
+        for (var i = 0; i < ps.length; i++) {
+            ps[i].setAttribute('data-index', i)
+            ps[i].ondragstart = function () {
+                index = this.dataset.index;
+                this.style.opacity = '0.5';
+                this.parentNode.style.borderWidth = '6px';
+            }
+        }
+
+        function move(el) {
+            el.ondragover = function (e) {
+                e.preventDefault();
+            };
+            el.ondrop = function (e) {
+                ps[index].style.opacity = 1;
+                ps[index].parentNode.style.borderWidth = '2px'
+                this.appendChild(ps[index])
+                e.stopPropagation();
+            }
+        }
+
+        move(div1);
+        move(div2);
+        move(div3);
+        body.ondragover = function (e) {
+            e.preventDefault();
+        }
+        body.ondrop = function () {
+            ps[index].style.opacity = 1;
+            ps[index].parentNode.style.borderWidth = '1px';
+            this.appendChild(ps[index]);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .div1 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid red;
+            float: left;
+        }
+
+        p {
+            background: orange;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .div2 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid blue;
+            float: left;
+            margin-left: 20px;
+        }
+
+        .div3 {
+            width: 200px;
+            height: 200px;
+            border: 2px solid green;
+            float: left;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body class="clearfix">
+    <div class="div1">
+        <p class="p1" class="item" draggable="true">p1段落内容</p>
+        <p class="p2" class="item" draggable="true">p2段落内容</p>
+        <p class="p3" class="item" draggable="true">p3段落内容</p>
+    </div>
+
+    <div class="div2">
+    </div>
+    <div class="div3"></div>
+
+    <script>
+        var obj = null;
+        document.ondragstart = function(e){
+            obj = e.target;
+            obj.parentNode.style.borderWidth = "5px";
+        }
+        document.ondragover = function(e){
+            e.preventDefault();
+        }
+        document.ondrop = function(e){
+            console.log(e.target)
+            if( e.target.nodeName != "P"){
+                e.target.appendChild( obj );
+            }
+        }
+    </script>
+</body>
+
+</html>
